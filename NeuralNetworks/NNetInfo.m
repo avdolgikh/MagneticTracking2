@@ -10,7 +10,7 @@ emitter_coordinate_number = 5;
 % An existing neural network researching:
 
 nnet_file_name = strcat( '.\Data\NNets\nnet_9receiv_33300_26-108-15' );      
-noisedSampleFile = '.\Data\Samples\emitter_sample_9receiv_1107_0.03_3_shift_receivers.dat';
+noisedSampleFile = '.\Data\Samples\emitter_sample_9receiv_297_0.04_3_unshift_receivers.dat';
 % rms_errors:                   [0.000667803557886967,0.000671348863333289,0.000751973890311945,0.0946448031778511,0.618022624017081]
 % rms_errors (shift receivers): [0.000938450456312098,0.00123112073911083,0.00106844441078006,0.0978604279445306,4.58410457713272]
 
