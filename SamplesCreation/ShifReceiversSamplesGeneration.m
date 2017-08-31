@@ -4,11 +4,11 @@ clc;
 %% Parameters:
 
 % Emitter position/orientation:
-emitter_sphera_max_radius = 0.2; % m, 0.35m
-emitter_linear_step = 0.1; % m
-emitter_angular_step = pi/180 * 20; % 3 degrees
-emitter_angular_coordinate_min = pi/180 * 5; % 5 degrees
-emitter_angular_coordinate_max = pi/180 * 85; % 15 degrees
+emitter_sphera_max_radius = 0.09; % m
+emitter_linear_step = 0.03; % m
+emitter_angular_step = pi/180 * 3;
+emitter_angular_coordinate_min = pi/180 * 3;
+emitter_angular_coordinate_max = pi/180 * 9;
 
 % Coils geometry:
 emitter_turns_number = 157;   % turns number of emitter coil
@@ -39,6 +39,8 @@ fprintf('Receivers have been created.\n');
 emitter_coordinates = BuildEmitterCoordinates( emitter_sphera_max_radius, emitter_linear_step, ...
                                             emitter_angular_step, emitter_angular_coordinate_min, ...
                                             emitter_angular_coordinate_max );
+%emitter_coordinates = [0.1, 0.05, -0.18, 0.03, 0.2];
+
 fprintf('Emitter position/orientation set has been created.\n');
 
 % one receiver has x-shift by 0.01 m:
@@ -62,7 +64,7 @@ fprintf('Elapsed time = %d s.\n', time_spent);
 fprintf('Data saving.\n');
 
 sample_size = size(emitter, 1);
-receivers_number = 9;
+receivers_number = size(receivers, 1);
 
 % Save Emitter movement grid into a file.
 dlmwrite(strcat('.\Data\Samples\emitter_sample_', num2str(receivers_number), 'receiv_', ...
