@@ -32,14 +32,14 @@ z_p_coef = receiver_length / (2*m + 1);
 %% Sample creation:
 
 % Receivers
-receivers = load('.\Data\Samples\receivers_9_33300.dat');
-fprintf('Receivers have been created.\n');
+%receivers = load('.\Data\Samples\receivers_9_33300.dat');
+receivers = load('.\Data\Samples\receivers_12_33300.dat');
+fprintf('Receivers have been loaded.\n');
 
 % Emitter position/orientation variations
 emitter_coordinates = BuildEmitterCoordinates( emitter_sphera_max_radius, emitter_linear_step, ...
                                             emitter_angular_step, emitter_angular_coordinate_min, ...
                                             emitter_angular_coordinate_max );
-%emitter_coordinates = [0.1, 0.05, -0.18, 0.03, 0.2];
 
 fprintf('Emitter position/orientation set has been created.\n');
 

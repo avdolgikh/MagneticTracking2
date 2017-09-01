@@ -3,8 +3,8 @@ clc;
 
 %% Parameters:
 emitter_coordinate_number = 5;
-nnet_file_name = strcat( '.\Data\NNets\nnet_9receiv_33300_26-108-15' );      
-sampleFile = '.\Data\Samples\emitter_sample_9receiv_297_0.04_3_shift_receivers.dat';
+nnet_file_name = strcat( '.\Data\NNets\nnet_12receiv_33300_32-69-19' );      
+sampleFile = '.\Data\Samples\emitter_sample_12receiv_297_0.04_3_shift_receivers.dat';
 partition_size = 297;
 shift_step = 0.004;
 
