@@ -10,6 +10,9 @@ emitter_angular_step = pi/180 * 3;
 emitter_angular_coordinate_min = pi/180 * 3;
 emitter_angular_coordinate_max = pi/180 * 9;
 
+% Receivers:
+shift_RMS = 0.001; % m
+
 % Coils geometry:
 emitter_turns_number = 157;   % turns number of emitter coil
 receiver_turns_number = 158;   % turns number of receiver coil
@@ -32,8 +35,10 @@ z_p_coef = receiver_length / (2*m + 1);
 %% Sample creation:
 
 % Receivers
-%receivers = load('.\Data\Samples\receivers_9_33300.dat');
-receivers = load('.\Data\Samples\receivers_12_33300.dat');
+receivers = load('.\Data\Samples\receivers_9_33300.dat');
+%receivers = load('.\Data\Samples\receivers_12_33300.dat');
+
+receivers_number = size(receivers, 1);
 fprintf('Receivers have been loaded.\n');
 
 % Emitter position/orientation variations
@@ -47,30 +52,34 @@ sample_size = size(emitter_coordinates, 1);
 
 emitter = [];
 
-for i = 1 : 5
+% define normal distributed shifting of linear coordinates of the receivers:
+shift = random('Normal', 0, shift_RMS, [receivers_number sample_size*3]); % 3 is number on linear coordinates (x, y, z)
 
-    % one receiver has x-shift:
-    receivers(1, 1) = receivers(1, 1) + 0.004;
-
-    [emitter_partition, ~] = AddMutualInductance( emitter_coordinates, receivers, emitter_radius, receiver_radius, ...
-                                             NpxNs, divider, Rp_h_coef, Rs_q_coef, xy_p_coef, z_g_coef, ...
-                                             z_p_coef, S, N, m, n );
-    fprintf('Set with mutual inductance has been created.\n');
-
+for i = 1 : sample_size
+    
+    shifted_receivers = receivers;
+    
+    start_index = (i - 1) * 3 + 1;
+    end_index = start_index + 2;
+    shifted_receivers(:, 1:3) = shifted_receivers(:, 1:3) + shift(:, start_index : end_index);
+    
+    [emitter_partition, ~] = AddMutualInductance( emitter_coordinates(i, :), shifted_receivers, emitter_radius, receiver_radius, ...
+                                                 NpxNs, divider, Rp_h_coef, Rs_q_coef, xy_p_coef, z_g_coef, ...
+                                                 z_p_coef, S, N, m, n );        
     emitter = [emitter; emitter_partition];
 end
-
+    
+fprintf('Set with mutual inductance has been created.\n');
 
 %% Data saving
 
 fprintf('Data saving.\n');
 
-receivers_number = size(receivers, 1);
-
 % Save Emitter movement grid into a file.
 dlmwrite(strcat('.\Data\Samples\emitter_sample_', num2str(receivers_number), 'receiv_', ...
                 num2str(sample_size), '_', ...
                 num2str(emitter_linear_step), '_', ...
-                num2str(emitter_angular_step /pi*180), ...
+                num2str(emitter_angular_step /pi*180), '_', ...
+                num2str(shift_RMS), ...
                 '_shift_receivers.dat'), emitter);
             
