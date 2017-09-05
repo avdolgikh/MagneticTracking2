@@ -35,8 +35,8 @@ z_p_coef = receiver_length / (2*m + 1);
 %% Sample creation:
 
 % Receivers
-receivers = load('.\Data\Samples\receivers_9_33300.dat');
-%receivers = load('.\Data\Samples\receivers_12_33300.dat');
+%receivers = load('.\Data\Samples\receivers_9_33300.dat');
+receivers = load('.\Data\Samples\receivers_12_33300.dat');
 
 receivers_number = size(receivers, 1);
 fprintf('Receivers have been loaded.\n');
