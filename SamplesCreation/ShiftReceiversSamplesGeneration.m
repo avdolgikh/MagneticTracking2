@@ -11,7 +11,7 @@ emitter_angular_coordinate_min = pi/180 * 3;
 emitter_angular_coordinate_max = pi/180 * 9;
 
 % Receivers:
-shift_RMS = 0.001; % m
+shift_RMS = 0.008; % m 0.001-0.01
 
 % Coils geometry:
 emitter_turns_number = 157;   % turns number of emitter coil
@@ -35,8 +35,8 @@ z_p_coef = receiver_length / (2*m + 1);
 %% Sample creation:
 
 % Receivers
-%receivers = load('.\Data\Samples\receivers_9_33300.dat');
-receivers = load('.\Data\Samples\receivers_12_33300.dat');
+receivers = load('.\Data\Samples\receivers_9_33300.dat');
+%receivers = load('.\Data\Samples\receivers_12_33300.dat');
 
 receivers_number = size(receivers, 1);
 fprintf('Receivers have been loaded.\n');
