@@ -1,8 +1,8 @@
 function [ nnet_sizes ] = GetNNetSizes( freeParamsSizeRange, nnet_number, inputSize, outputSize )
     % Number of hidden layers = 3 (hard code).
 
-    lb = [outputSize*40 outputSize*30 outputSize*10];
-    ub = [outputSize*400 outputSize*300 outputSize*100];
+    lb = [outputSize*4 outputSize*4 outputSize*4];
+    ub = [outputSize*30 outputSize*30 outputSize*30];
 
     nnet_sizes = zeros(0, 3);
     
@@ -26,8 +26,8 @@ end
 function [c, ceq] = eqCon(hiddenLayerSize)
     ceq = [];
     c = [
-	    5 - hiddenLayerSize(1)/hiddenLayerSize(2);
-	    5 - hiddenLayerSize(2)/hiddenLayerSize(3);
+	    1.5 - hiddenLayerSize(1)/hiddenLayerSize(2);
+	    1.5 - hiddenLayerSize(2)/hiddenLayerSize(3);
         ];
 end
 

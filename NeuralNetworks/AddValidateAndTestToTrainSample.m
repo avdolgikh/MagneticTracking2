@@ -10,23 +10,27 @@ Test data: Used once and only once on the best design to obtain an unbiased esti
            error of unseen nontraining data.
 %}
 
-shufleInd = randperm(size(trainInputs, 2));
-trainInputs = trainInputs(:, shufleInd);
-trainTargets = trainTargets(:, shufleInd);
+%shufleInd = randperm(size(trainInputs, 2));
+%trainInputs = trainInputs(:, shufleInd);
+%trainTargets = trainTargets(:, shufleInd);
 
-shufleInd = randperm(size(testInputs, 2));
-testInputs = testInputs(:, shufleInd);
-testTargets = testTargets(:, shufleInd);
+%shufleInd = randperm(size(testInputs, 2));
+%testInputs = testInputs(:, shufleInd);
+%testTargets = testTargets(:, shufleInd);
 
 trainSize = size(trainInputs, 2);
-validation_and_test_size = round(trainSize * 0.45);
-validation_size = round( validation_and_test_size / 2 );
-[validation_and_test_inputs, idx] = datasample(testInputs', validation_and_test_size, 'Replace', false);
-transposed_testTargets = testTargets';
-validation_and_test_targets = transposed_testTargets(idx, :);
+%validation_and_test_size = round(trainSize * 0.45);
+%validation_size = round( validation_and_test_size / 2 );
+validation_size = round( size(testInputs, 2) / 2 );
 
-nnetInputs = [trainInputs'; validation_and_test_inputs]';
-nnetTargets = [trainTargets'; validation_and_test_targets]';
+%[validation_and_test_inputs, idx] = datasample(testInputs', validation_and_test_size, 'Replace', false);
+%transposed_testTargets = testTargets';
+%validation_and_test_targets = transposed_testTargets(idx, :);
+
+%nnetInputs = [trainInputs'; validation_and_test_inputs]';
+%nnetTargets = [trainTargets'; validation_and_test_targets]';
+nnetInputs = [trainInputs'; testInputs']';
+nnetTargets = [trainTargets'; testTargets']';
 
 sampleSize = size(nnetInputs, 2);
 

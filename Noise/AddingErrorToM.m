@@ -16,7 +16,7 @@ SNR_Error_dictionary = containers.Map(SNR_Error_map(:, 1), SNR_Error_map(:, 2));
 error_ratio_rms = SNR_Error_dictionary(SNR_dB);
 
 % load a test sample
-emitter_original_data = load('.\Data\Samples\emitter_sample_12receiv_297_0.04_3_0.01_shift_receivers.dat');
+emitter_original_data = load('.\Data\Samples\emitter_sample_12receiv_0.01shift__lin_0.04_0.08_ang_4_2-10_validation.dat');
 
 [sample_size, sample_vector_length, receivers_number, coordinates_ind, mutual_inductance_ind] = ...
                                         GetSampleInfo(emitter_original_data, emitter_coordinate_number);
@@ -32,7 +32,7 @@ emitter_noised_data(:, mutual_inductance_ind) = emitter_original_data(:, mutual_
 % Save Emitter noised grid into a file.
 
 dlmwrite(strcat('.\Data\Samples\emitter_noised_', num2str(SNR_dB), 'SNR_', ...
-                num2str(receivers_number), 'receiv_', num2str(sample_size), '_0.04_3_0.01_shift_receivers.dat'), ...
+                num2str(receivers_number), '_0.01shift__lin_0.04_0.08_ang_4_2-10_validation.dat'), ...
                 emitter_noised_data);
 
 
