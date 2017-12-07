@@ -26,8 +26,8 @@ end
 function [c, ceq] = eqCon(hiddenLayerSize)
     ceq = [];
     c = [
-	    1.5 - hiddenLayerSize(1)/hiddenLayerSize(2);
-	    1.5 - hiddenLayerSize(2)/hiddenLayerSize(3);
+	    %1.5 - hiddenLayerSize(1)/hiddenLayerSize(2);
+	    %1.5 - hiddenLayerSize(2)/hiddenLayerSize(3);
         ];
 end
 
